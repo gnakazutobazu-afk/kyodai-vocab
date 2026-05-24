@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cream font-noto-sans text-ink m-0;
+  }
+
+  #root {
+    @apply min-h-screen flex flex-col;
+  }
+}
+
+@layer utilities {
+  .highlight-word {
+    @apply bg-gold/20 text-navy-dark font-semibold px-0.5 rounded;
+  }
+}

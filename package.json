@@ -1,0 +1,33 @@
+{
+  "name": "kyodai-vocab",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "watch:excel": "python3 scripts/watch_excel.py",
+    "convert": "python3 scripts/excel_to_json.py --input \"/Users/nakaz/Library/Mobile Documents/com~apple~CloudDocs/001_ビジネス/109_note/京大英語過去問/京大英語完全対策英単語リスト_fix01.xlsx\" --output ./public/data/words.json",
+    "deploy": "npm run convert && npx vercel --prod --yes"
+  },
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "autoprefixer": "^10.5.0",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.0.12"
+  }
+}
