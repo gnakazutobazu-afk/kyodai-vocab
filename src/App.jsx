@@ -5,6 +5,10 @@ import FilterBar from "./components/FilterBar";
 import WordCard from "./components/WordCard";
 import Footer from "./components/Footer";
 
+function wordToSlug(word) {
+  return word.toLowerCase().replace(/\s+/g, "-");
+}
+
 export default function App() {
   const [words, setWords] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,6 +28,20 @@ export default function App() {
       .then((data) => {
         setWords(data);
         setLoading(false);
+
+        // /words/:slug のURLで該当単語を自動オープン
+        const match = window.location.pathname.match(/^\/words\/([^/]+)\/?$/);
+        if (match) {
+          const slug = decodeURIComponent(match[1]).toLowerCase();
+          const found = data.find((w) => wordToSlug(w.word) === slug);
+          if (found) {
+            setOpenWord(found.word);
+            setTimeout(() => {
+              const el = document.getElementById(`word-${found.word}`);
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+            }, 200);
+          }
+        }
       })
       .catch((err) => {
         setError(err.message);

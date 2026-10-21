@@ -52,4 +52,4 @@ echo "[$(date '+%H:%M:%S')] ✅ 完了" >> "$LOG"
 WORD_COUNT=$(python3 -c "import json; d=json.load(open('public/data/words.json')); print(len(d))" 2>/dev/null || echo "不明")
 bash ~/scripts/line_send.sh "✅ 京大英語頻出単語 週次デプロイ完了（$(date '+%Y-%m-%d %H:%M')）
 📚 収録語数：${WORD_COUNT}語
-🌐 https://kyodai-vocab.vercel.app"
+🌐 https://kyotan.tobazu.com"

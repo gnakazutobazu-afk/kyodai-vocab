@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/ssg_build.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "watch:excel": "python3 scripts/watch_excel.py",
-    "convert": "python3 scripts/excel_to_json.py --input \"/Users/nakaz/Library/Mobile Documents/com~apple~CloudDocs/001_ビジネス/109_note/京大英語過去問/京大英語完全対策英単語リスト_fix01.xlsx\" --output ./public/data/words.json",
+    "convert": "cd ~/kyotan && python3 export_site.py ~/kyodai-vocab/public/data/words.json",
     "deploy": "npm run convert && npx vercel --prod --yes"
   },
   "dependencies": {

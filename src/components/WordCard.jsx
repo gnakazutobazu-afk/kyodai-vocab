@@ -60,6 +60,7 @@ export default function WordCard({ word: data, isOpen, onToggle }) {
 
   return (
     <div
+      id={`word-${data.word}`}
       className={`bg-white rounded-xl border transition-shadow ${
         isOpen ? "shadow-lg border-gold" : "shadow-sm border-gray-200 hover:shadow-md"
       }`}
@@ -83,6 +84,11 @@ export default function WordCard({ word: data, isOpen, onToggle }) {
             <p className="font-noto-sans text-sm text-muted mt-1 leading-relaxed">
               {data.meaning_ja}
             </p>
+            {data.frequency >= 2 && (
+              <p className="font-noto-sans text-xs text-navy mt-1">
+                京大 {data.frequency}回（{data.years.map((y) => "’" + y.slice(2)).join(" ")}）
+              </p>
+            )}
           </div>
           <div className="flex flex-col items-end gap-1.5 shrink-0">
             <span className={`font-noto-sans text-xs font-bold px-2 py-0.5 rounded ${levelColor}`}>
@@ -125,7 +131,7 @@ export default function WordCard({ word: data, isOpen, onToggle }) {
                 </h3>
                 <div className="border-l-2 border-gold pl-3">
                   <p className="font-garamond text-base sm:text-lg text-ink leading-relaxed">
-                    {highlightWord(data.example_en, data.word)}
+                    {highlightWord(data.example_en, data.word.split(" ")[0])}
                   </p>
                   {data.example_ja && (
                     <p className="font-noto-sans text-sm text-muted mt-1 leading-relaxed">
@@ -166,7 +172,7 @@ export default function WordCard({ word: data, isOpen, onToggle }) {
 
                   {/* 📌 京大での使われ方 — full width */}
                   {data.kyodai_usage && (
-                    <DetailRow emoji="📌" label="京大での使われ方" content={data.kyodai_usage} accent />
+                    <DetailRow emoji="📌" label="派生語・語法" content={data.kyodai_usage} accent />
                   )}
                 </div>
 

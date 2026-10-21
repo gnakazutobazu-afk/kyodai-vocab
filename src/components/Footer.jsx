@@ -5,7 +5,7 @@ export default function Footer() {
         <p className="text-white/80 font-semibold">京大英語頻出単語</p>
         <p>2000〜2026年の京都大学英語入試を独自に分析したデータベース</p>
         <p className="text-xs mt-2 text-white/40">
-          掲載の例文は学習目的のため引用しています。著作権は各年度の出題機関に帰属します。
+          掲載の例文はすべて書き下ろしです（入試本文の転載はありません）。
         </p>
         <p className="text-xs mt-3">
           <a href="/privacy-policy.html" className="text-white/40 hover:text-white/70 underline underline-offset-2">
