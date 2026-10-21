@@ -1,7 +1,7 @@
 const BADGES = [
   "📅 2000〜2026年 京大入試を集計",
   "📚 テーマ別 1,222語",
-  "✍️ 例文はすべて書き下ろし",
+  "📖 例文は京大過去問から",
   "🔖 京大出題回数・年度つき",
 ];
 
@@ -16,7 +16,7 @@ export default function Hero() {
           Complete Vocabulary Database 2000–2026
         </p>
         <p className="font-noto-sans text-sm sm:text-base text-white/80 leading-relaxed max-w-2xl mx-auto mb-8">
-          書籍『京単』のWeb版。2000〜2026年の京都大学英語入試の英文を集計し、京大受験に必要な1,222語をテーマ別に収録。各語に京大での出題回数・出題年度、派生語・語法、書き下ろし例文をつけています。
+          書籍『京単』のWeb版。2000〜2026年の京都大学英語入試の英文を集計し、京大受験に必要な1,222語をテーマ別に収録。各語に京大での出題回数・出題年度、派生語・語法、そして実際の京大入試の英文から選んだ例文をつけています（書籍とは別の例文なので併用できます）。
         </p>
         <div className="flex flex-wrap justify-center gap-2">
           {BADGES.map((badge) => (

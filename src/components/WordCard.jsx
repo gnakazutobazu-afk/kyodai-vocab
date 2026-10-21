@@ -142,6 +142,12 @@ export default function WordCard({ word: data, isOpen, onToggle }) {
               </div>
             )}
 
+            {!data.example_en && (
+              <p className="font-noto-sans text-sm text-muted">
+                📘 2000〜2026年の京大の英文には出ていない語です。例文は書籍『京単』に収録しています。
+              </p>
+            )}
+
             {/* 🔍 解説ブロック */}
             {!data.has_detail ? (
               <div className="text-center py-3 text-muted font-noto-sans text-sm">
