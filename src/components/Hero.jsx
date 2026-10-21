@@ -10,7 +10,7 @@ export default function Hero() {
     <section className="bg-gradient-to-br from-navy-dark to-navy-mid text-white py-14 px-4 sm:py-20">
       <div className="max-w-3xl mx-auto text-center">
         <h1 className="font-noto-serif text-3xl sm:text-5xl font-bold tracking-tight mb-3">
-          京大英語頻出単語
+          京単オンライン
         </h1>
         <p className="font-garamond text-lg sm:text-2xl text-gold-light italic mb-6 tracking-wide">
           Complete Vocabulary Database 2000–2026
@@ -18,6 +18,7 @@ export default function Hero() {
         <p className="font-noto-sans text-sm sm:text-base text-white/80 leading-relaxed max-w-2xl mx-auto mb-8">
           書籍『京単』のWeb版。2000〜2026年の京都大学英語入試の英文を集計し、京大受験に必要な1,222語をテーマ別に収録。各語に京大での出題回数・出題年度、派生語・語法、そして実際の京大入試の英文から選んだ例文をつけています（書籍とは別の例文なので併用できます）。
         </p>
+        <a href="/guide" className="inline-block font-noto-sans text-sm text-gold-light underline underline-offset-4 mb-6">はじめての方へ：京単オンラインの使い方</a>
         <div className="flex flex-wrap justify-center gap-2">
           {BADGES.map((badge) => (
             <span

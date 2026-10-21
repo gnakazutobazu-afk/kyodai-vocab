@@ -2,12 +2,15 @@ export default function Footer() {
   return (
     <footer className="bg-navy-dark text-white/60 mt-auto">
       <div className="max-w-6xl mx-auto px-4 py-8 text-center font-noto-sans text-sm space-y-1">
-        <p className="text-white/80 font-semibold">京大英語頻出単語</p>
+        <p className="text-white/80 font-semibold">京単オンライン</p>
         <p>2000〜2026年の京都大学英語入試を独自に分析したデータベース</p>
         <p className="text-xs mt-2 text-white/40">
           例文は学習目的で京都大学入試問題から引用しています。著作権は各原著作者に帰属します。和訳は当サイトによるものです。
         </p>
         <p className="text-xs mt-3">
+          <a href="/guide" className="text-white/40 hover:text-white/70 underline underline-offset-2 mr-4">
+            使い方
+          </a>
           <a href="/privacy-policy.html" className="text-white/40 hover:text-white/70 underline underline-offset-2">
             プライバシーポリシー
           </a>

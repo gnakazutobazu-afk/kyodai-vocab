@@ -1,5 +1,12 @@
 {
   "rewrites": [
-    { "source": "/words/:path*", "destination": "/index.html" }
+    {
+      "source": "/words/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guide",
+      "destination": "/index.html"
+    }
   ]
 }

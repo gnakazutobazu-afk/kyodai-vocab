@@ -25,7 +25,7 @@ function escapeHtml(str) {
 }
 
 function buildTitle(word) {
-  return `${word.word} - ${word.meaning_ja} | 語源・例文 | 京大英語頻出単語`;
+  return `${word.word} - ${word.meaning_ja} | 語源・例文 | 京単オンライン`;
 }
 
 function buildDescription(word) {
@@ -48,7 +48,7 @@ function buildJsonLd(word, url) {
     inDefinedTermSet: {
       "@type": "DefinedTermSet",
       "@id": `${SITE_URL}/#dataset`,
-      name: "京大英語頻出単語データベース",
+      name: "京単オンライン",
       url: SITE_URL,
     },
   };

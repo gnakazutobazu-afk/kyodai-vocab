@@ -4,12 +4,15 @@ import Hero from "./components/Hero";
 import FilterBar from "./components/FilterBar";
 import WordCard from "./components/WordCard";
 import Footer from "./components/Footer";
+import BookPromo from "./components/BookPromo";
+import Guide from "./pages/Guide";
 
 function wordToSlug(word) {
   return word.toLowerCase().replace(/\s+/g, "-");
 }
 
 export default function App() {
+  const isGuide = window.location.pathname.replace(/\/$/, "") === "/guide";
   const [words, setWords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -81,6 +84,16 @@ export default function App() {
     setOpenWord((prev) => (prev === wordKey ? null : wordKey));
   }
 
+  if (isGuide) {
+    return (
+      <div className="flex flex-col min-h-screen bg-cream">
+        <Header totalCount={words.length || 1222} />
+        <Guide />
+        <Footer />
+      </div>
+    );
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-cream">
@@ -113,6 +126,9 @@ export default function App() {
       />
 
       <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-6">
+        <div className="mb-6">
+          <BookPromo compact />
+        </div>
         {filteredWords.length === 0 ? (
           <div className="text-center py-20 text-muted font-noto-sans">
             <p className="text-lg">該当する単語が見つかりませんでした。</p>
