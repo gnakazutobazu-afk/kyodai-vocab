@@ -4,7 +4,7 @@ function BuyButton({ href, label, sub }) {
   if (!href) {
     return (
       <span className="font-noto-sans text-sm px-4 py-2 rounded-lg border border-white/30 text-white/60 cursor-default">
-        {label}（近日発売）
+        {label}（準備中）
       </span>
     );
   }

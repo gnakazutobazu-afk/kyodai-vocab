@@ -2,6 +2,6 @@
 export const BOOK = {
   title: "京単",
   subtitle: "京大英語 2000–2026 頻出語から編む 1,222 語",
-  paperbackUrl: "", // Amazon ペーパーバック（税込2,420円）
-  kindleUrl: "", // Kindle版（1,650円）
+  paperbackUrl: "https://www.amazon.co.jp/dp/B0HNSVQ9L2", // Amazon ペーパーバック（税込2,420円）
+  kindleUrl: "https://www.amazon.co.jp/dp/B0HNSN7BHS", // Kindle版（1,650円）
 };
