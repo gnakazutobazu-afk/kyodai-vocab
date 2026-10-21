@@ -1,17 +1,12 @@
 const THEME_LABELS = {
-  general:    "汎用語",
   science:    "科学",
-  philosophy: "哲学",
-  psychology: "心理",
-  history:    "歴史",
-  society:    "社会",
-  language:   "言語",
-  arts:       "芸術",
-  technology: "テクノロジー",
+  psychology: "心と感情",
+  society:    "社会・人間関係",
+  technology: "経済・技術",
+  culture:    "言語・文化",
   nature:     "自然",
-  human_mind: "人間の心",
-  culture:    "文化",
   medicine:   "医学",
+  general:    "動詞・形容詞・熟語",
 };
 
 const LEVEL_OPTIONS = ["頻出", "重要", "発展"];

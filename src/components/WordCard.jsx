@@ -60,7 +60,7 @@ export default function WordCard({ word: data, isOpen, onToggle }) {
 
   return (
     <div
-      id={`word-${data.word}`}
+      id={`word-${data.id}`}
       className={`bg-white rounded-xl border transition-shadow ${
         isOpen ? "shadow-lg border-gold" : "shadow-sm border-gray-200 hover:shadow-md"
       }`}

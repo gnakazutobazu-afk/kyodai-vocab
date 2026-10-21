@@ -26,7 +26,7 @@ export default function App() {
         return res.json();
       })
       .then((data) => {
-        setWords(data);
+        setWords(data.map((w, i) => ({ ...w, id: `${wordToSlug(w.word)}-${i}` })));
         setLoading(false);
 
         // /words/:slug のURLで該当単語を自動オープン
@@ -35,9 +35,10 @@ export default function App() {
           const slug = decodeURIComponent(match[1]).toLowerCase();
           const found = data.find((w) => wordToSlug(w.word) === slug);
           if (found) {
-            setOpenWord(found.word);
+            const foundId = `${wordToSlug(found.word)}-${data.indexOf(found)}`;
+            setOpenWord(foundId);
             setTimeout(() => {
-              const el = document.getElementById(`word-${found.word}`);
+              const el = document.getElementById(`word-${foundId}`);
               if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
             }, 200);
           }
@@ -121,10 +122,10 @@ export default function App() {
           <div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
             {filteredWords.map((word) => (
               <WordCard
-                key={word.word}
+                key={word.id}
                 word={word}
-                isOpen={openWord === word.word}
-                onToggle={() => handleCardToggle(word.word)}
+                isOpen={openWord === word.id}
+                onToggle={() => handleCardToggle(word.id)}
               />
             ))}
           </div>
