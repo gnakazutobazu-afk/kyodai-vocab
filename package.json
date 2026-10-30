@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "watch:excel": "python3 scripts/watch_excel.py",
-    "convert": "cd ~/kyotan && python3 export_site.py ~/kyodai-vocab/public/data/words.json && cd web && python3 merge.py ~/kyodai-vocab/public/data/words.json && python3 ety_merge.py ~/kyodai-vocab/public/data/words.json",
+    "convert": "cd ~/kyotan && python3 export_site.py ~/kyodai-vocab/public/data/words.json && cd web && python3 merge.py ~/kyodai-vocab/public/data/words.json && python3 align.py ~/kyodai-vocab/public/data/words.json && python3 ety_merge.py ~/kyodai-vocab/public/data/words.json",
     "deploy": "npm run convert && npx vercel --prod --yes"
   },
   "dependencies": {

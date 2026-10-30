@@ -144,7 +144,11 @@ export default function WordCard({ word: data, isOpen, onToggle }) {
 
             {!data.example_en && (
               <p className="font-noto-sans text-sm text-muted">
-                📘 2000〜2026年の京大の英文には出ていない語です。例文は書籍『京単』に収録しています。
+                📘 {data.example_note ||
+                  (data.frequency > 0
+                    ? "この意味での京大入試の例文は載せていません。"
+                    : "2000〜2026年の京大の英文には出ていない語です。")}
+                書き下ろし例文は書籍『京単』に収録しています。
               </p>
             )}
 

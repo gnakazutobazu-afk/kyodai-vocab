@@ -160,8 +160,14 @@ const words = JSON.parse(
 
 console.log(`Generating ${words.length} word pages...`);
 
+// 同綴りの品詞違い（figure の名詞・動詞など）は同じ URL になるので，京大の例文がある項目のページを残す
+const bySlug = new Map();
 for (const word of words) {
   const slug = wordToSlug(word.word);
+  if (!bySlug.has(slug) || (word.example_en && !bySlug.get(slug).example_en)) bySlug.set(slug, word);
+}
+
+for (const [slug, word] of bySlug) {
   const dir = path.join(distDir, "words", slug);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, "index.html"), generateWordHtml(baseHtml, word));
