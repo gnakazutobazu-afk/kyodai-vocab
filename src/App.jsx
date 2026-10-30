@@ -6,13 +6,16 @@ import WordCard from "./components/WordCard";
 import Footer from "./components/Footer";
 import BookPromo from "./components/BookPromo";
 import Guide from "./pages/Guide";
+import Errata from "./pages/Errata";
 
 function wordToSlug(word) {
   return word.toLowerCase().replace(/\s+/g, "-");
 }
 
 export default function App() {
-  const isGuide = window.location.pathname.replace(/\/$/, "") === "/guide";
+  const page = window.location.pathname.replace(/\/$/, "");
+  const isGuide = page === "/guide";
+  const isErrata = page === "/errata";
   const [words, setWords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -84,11 +87,11 @@ export default function App() {
     setOpenWord((prev) => (prev === wordKey ? null : wordKey));
   }
 
-  if (isGuide) {
+  if (isGuide || isErrata) {
     return (
       <div className="flex flex-col min-h-screen bg-cream">
         <Header totalCount={words.length || 1222} />
-        <Guide />
+        {isGuide ? <Guide /> : <Errata />}
         <Footer />
       </div>
     );

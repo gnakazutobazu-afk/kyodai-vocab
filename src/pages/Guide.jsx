@@ -1,6 +1,7 @@
 import BookPromo from "../components/BookPromo";
+import { REPORT_FORM_URL } from "../book";
 
-function Section({ title, children }) {
+export function Section({ title, children }) {
   return (
     <section className="bg-white rounded-xl border border-gray-200 p-5 sm:p-6">
       <h2 className="font-noto-serif text-lg sm:text-xl font-bold text-navy-dark border-b-2 border-gold pb-2 mb-3">
@@ -74,7 +75,11 @@ export default function Guide() {
 
       <Section title="ご利用にあたって">
         <p>例文は学習目的で京都大学の入試問題から引用しています。著作権は各原著作者に帰属します。和訳は当サイトによるものです。</p>
-        <p>内容の誤りに気づいた場合は、お手数ですがお知らせください。</p>
+        <p>
+          内容の誤りに気づいた場合は、お手数ですが
+          <a href={REPORT_FORM_URL} target="_blank" rel="noopener noreferrer" className="text-navy underline underline-offset-2">ご報告フォーム</a>
+          からお知らせください。これまでの修正は<a href="/errata" className="text-navy underline underline-offset-2">修正履歴</a>にまとめています。
+        </p>
       </Section>
     </main>
   );

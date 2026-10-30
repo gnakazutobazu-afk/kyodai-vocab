@@ -11,6 +11,9 @@ export default function Footer() {
           <a href="/guide" className="text-white/40 hover:text-white/70 underline underline-offset-2 mr-4">
             使い方
           </a>
+          <a href="/errata" className="text-white/40 hover:text-white/70 underline underline-offset-2 mr-4">
+            修正履歴・誤植のご報告
+          </a>
           <a href="/privacy-policy.html" className="text-white/40 hover:text-white/70 underline underline-offset-2">
             プライバシーポリシー
           </a>

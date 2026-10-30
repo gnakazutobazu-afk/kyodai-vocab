@@ -7,6 +7,10 @@
     {
       "source": "/guide",
       "destination": "/index.html"
+    },
+    {
+      "source": "/errata",
+      "destination": "/index.html"
     }
   ]
 }
