@@ -99,13 +99,12 @@ function generateWordHtml(baseHtml, word) {
   const extraHead = `
     <script type="application/ld+json">${jsonLd}</script>`;
 
-  const noscript = `
-  <noscript>
+  // 検索エンジンが JS 実行前に読めるよう，解説を #root の中に置く（React の描画で置き換わる）
+  const content = `
     <div style="max-width:800px;margin:2rem auto;padding:1rem;font-family:sans-serif">
     ${buildNoscriptContent(word)}
     <p><a href="${SITE_URL}/">← 単語一覧に戻る</a></p>
-    </div>
-  </noscript>`;
+    </div>`;
 
   return baseHtml
     .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
@@ -142,8 +141,37 @@ function generateWordHtml(baseHtml, word) {
       `<meta name="twitter:description" content="${description}" />`
     )
     .replace("</head>", `${extraHead}\n  </head>`)
-    .replace('<div id="root"></div>', `${noscript}\n  <div id="root"></div>`);
+    .replace('<div id="root"></div>', `<div id="root">${content}</div>`);
 }
+
+// /guide・/errata は SPA の別ページ。タイトル・canonical を変えた HTML を置き，トップの重複と見なされないようにする
+function generatePageHtml(baseHtml, { slug, title, description, body }) {
+  const url = `${SITE_URL}/${slug}`;
+  return baseHtml
+    .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
+    .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${description}" />`)
+    .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${url}" />`)
+    .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${title}" />`)
+    .replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${description}" />`)
+    .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${url}" />`)
+    .replace('<div id="root"></div>', `<div id="root"><div style="max-width:800px;margin:2rem auto;padding:1rem;font-family:sans-serif">${body}</div></div>`);
+}
+
+const PAGES = [
+  {
+    slug: "guide",
+    title: "京単オンラインの使い方 | 京単オンライン",
+    description: "京大英語の頻出語1,222語を、京大入試の例文・語源・覚え方とあわせて確認できる無料の単語データベース「京単オンライン」の使い方と、書籍『京単』との使い分け。",
+    body: "<h1>京単オンラインの使い方</h1><p>2000〜2026年度の京都大学の英語入試に出た英文を集計し、京大受験に必要な1,222語を選びました。書籍『京単』と同じ語を収録しています。ジャンル・出題頻度で絞り込み、英語・日本語のどちらでも検索できます。</p>",
+  },
+  {
+    slug: "errata",
+    title: "修正履歴・誤植のご報告 | 京単オンライン",
+    description: "書籍『京単』（初版・第2版・第2版第2刷）と京単オンラインに加えた修正の一覧。初版と第2版の見出し語番号の対応表、誤植・修正点のご報告フォーム。",
+    body: "<h1>修正履歴・誤植のご報告</h1><p>書籍『京単』と京単オンラインに加えた修正を、版・刷ごとにまとめています。</p>",
+  },
+];
+
 
 // ── Main ──────────────────────────────────────────────────────────────────
 
@@ -175,12 +203,27 @@ for (const [slug, word] of bySlug) {
 
 console.log("Word pages generated.");
 
+for (const page of PAGES) {
+  const dir = path.join(distDir, page.slug);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, "index.html"), generatePageHtml(baseHtml, page));
+}
+
+// トップページも JS 実行前に中身が読めるようにする
+fs.writeFileSync(
+  path.join(distDir, "index.html"),
+  baseHtml.replace(
+    '<div id="root"></div>',
+    `<div id="root"><div style="max-width:800px;margin:2rem auto;padding:1rem;font-family:sans-serif"><h1>京単オンライン</h1><p>2000〜2026年の京都大学英語入試を集計し、京大受験に必要な1,222語を、出題回数・年度、京大入試の例文、語源・覚え方つきで収録した無料の単語データベースです。書籍『京単』のWeb版。</p><p><a href="/guide">使い方</a>　<a href="/errata">修正履歴・誤植のご報告</a></p></div></div>`
+  )
+);
+
 // ── sitemap.xml ───────────────────────────────────────────────────────────
 
 const priorityMap = { 頻出: "0.8", 重要: "0.7", 発展: "0.6" };
 const today = new Date().toISOString().split("T")[0];
 
-const urlEntries = words
+const urlEntries = [...bySlug.values()]
   .map((w) => {
     const slug = wordToSlug(w.word);
     const priority = priorityMap[w.level] || "0.6";
@@ -201,10 +244,16 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+${PAGES.map((p) => `  <url>
+    <loc>${SITE_URL}/${p.slug}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>`).join("\n")}
 ${urlEntries}
 </urlset>`;
 
 fs.writeFileSync(path.join(distDir, "sitemap.xml"), sitemap, "utf-8");
-console.log(`sitemap.xml generated (${words.length + 1} URLs).`);
+console.log(`sitemap.xml generated (${bySlug.size + PAGES.length + 1} URLs).`);
 
 console.log("SSG build complete.");
